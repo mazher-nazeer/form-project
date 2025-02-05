@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const VaccineCertificate = () => {
@@ -7,6 +7,7 @@ const VaccineCertificate = () => {
   const card = searchParams.get("card");
   const [data, setData] = useState(null);
   const cardRef = useRef();
+  
 
   useEffect(() => {
     if (card) {
