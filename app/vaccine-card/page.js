@@ -1,6 +1,8 @@
 "use client";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const VaccineCertificate = () => {
   const searchParams = useSearchParams();
