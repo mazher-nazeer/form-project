@@ -60,6 +60,14 @@ const Home = () => {
     console.log("QR Code URL:", qrUrl);
   };
 
+  const shareOnWhatsApp = () => {
+    if (qrCodeUrl) {
+      const message = encodeURIComponent("Here is your QR Code: " + qrCodeUrl);
+      const whatsappUrl = `https://wa.me/?text=${message}`;
+      window.open(whatsappUrl, "_blank");
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto p-4 border rounded-lg shadow-md">
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -90,6 +98,12 @@ const Home = () => {
           <img src={qrCodeUrl} alt="QR Code" className="mx-auto w-40 h-40" />
         </div>
       )}
+      <button
+            onClick={shareOnWhatsApp}
+            className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Share on WhatsApp
+          </button>
     </div>
   );
 };
