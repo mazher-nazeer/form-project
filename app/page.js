@@ -43,7 +43,8 @@ const Home = () => {
     setGeneratedKey(randomKey);
 
     // Construct the QR Code URL
-    const qrUrl = `http://localhost:3000/vaccine-card?card=${randomKey}`;
+
+    const qrUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}?card=${randomKey}`;
 
     // Save form data to localStorage
     localStorage.setItem(randomKey, JSON.stringify(formData));
