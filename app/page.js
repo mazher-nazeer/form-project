@@ -37,29 +37,36 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Generate a unique 10-character alphanumeric key
     const randomKey = Math.random().toString(36).substring(2, 12).toUpperCase();
     setGeneratedKey(randomKey);
-
+  
+    // Get all keys from localStorage
+    const storedKeys = Object.keys(localStorage);
+  
+    // If more than one key exists, remove the oldest one
+    if (storedKeys.length >= 1) {
+      localStorage.removeItem(storedKeys[0]);
+    }
+  
     // Construct the QR Code URL
-
     const qrUrl = `https://form-project-red.vercel.app/vaccine-card?card=${randomKey}`;
-
+  
     // Save form data to localStorage
     localStorage.setItem(randomKey, JSON.stringify(formData));
-
+  
     // Generate QR code as an image
     QRCode.toDataURL(qrUrl)
       .then((url) => {
         setQrCodeUrl(url);
       })
       .catch((err) => console.error("QR Code Error:", err));
-
+  
     console.log("Form Data:", formData);
     console.log("QR Code URL:", qrUrl);
   };
-
+  
   
 
   return (
