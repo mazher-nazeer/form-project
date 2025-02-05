@@ -73,8 +73,8 @@ const VaccineCard = () => {
         </div>
         <div className="flex items-center justify-center">
           <img
-            // src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://form-project-red.vercel.app/vaccine-card?card=${card}`}
-            src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/vaccine-card?card=${card}`}
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://form-project-red.vercel.app/vaccine-card?card=${card}`}
+            // src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/vaccine-card?card=${card}`}
             alt="QR Code"
             className="w-24 h-24 mx-auto print:w-12 print:h-12"
           />
@@ -139,7 +139,7 @@ const VaccineCard = () => {
           </div>
           <div className=" flex justify-center">
           {data.image ? (
-            <Image src={data.image} alt="Patient" className="w-32 h-32 print:w-28 " width={0} height={0} />
+            <Image src={data.image} alt="Patient" className="w-32 h-32 print:w-24 " width={0} height={0} />
           ) : (
             <Image src="https://via.placeholder.com/100x120" alt="Patient" className="w-24 h-24 rounded" />
           )}
@@ -150,7 +150,7 @@ const VaccineCard = () => {
       
 
         {/* Vaccination Data */}
-        <div className="mb-6 print:my-4">
+        <div className="mb-6 print:my-2">
           <h2 className="text-center text-xl font-bold border-b border-black py-2 mb-4 print:text-[26px]">
             VACCINATION CERTIFICATE
           </h2>
