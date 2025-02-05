@@ -153,7 +153,7 @@ const VaccineCard = () => {
       
 
         {/* Vaccination Data */}
-        <div className="mb-6 print:my-2">
+        <div className="mb-6 print:my-8 ">
           <h2 className="text-center text-xl font-bold border-b border-black py-2 mb-4 print:text-[26px]">
             VACCINATION CERTIFICATE
           </h2>
