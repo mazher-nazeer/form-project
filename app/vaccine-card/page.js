@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const VaccineCertificate = () => {
@@ -142,4 +142,11 @@ const VaccineCertificate = () => {
   );
 };
 
-export default VaccineCertificate;
+
+export default function VaccineCertificateWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VaccineCertificate />
+    </Suspense>
+  );
+}
