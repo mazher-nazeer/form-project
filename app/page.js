@@ -24,16 +24,57 @@ const Home = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFormData({ ...formData, image: reader.result });
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+  
+    reader.onload = (e) => {
+      const img = new Image();
+      img.src = e.target.result;
+  
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+  
+        const maxWidth = 200; // Set maximum width for compression
+        const maxHeight = 200; // Set maximum height for compression
+        let width = img.width;
+        let height = img.height;
+  
+        // Scale the image to maintain aspect ratio
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Draw image to canvas with 72 DPI
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // Convert canvas to a compressed JPEG/WEBP format
+        const compressedDataUrl = canvas.toDataURL("image/webp", 0.7); // 0.7 compression
+  
+        // Save the compressed image to localStorage
+        localStorage.setItem("compressedImage", compressedDataUrl);
+  
+        // Set the compressed image to the state
+        setData((prev) => ({ ...prev, image: compressedDataUrl }));
       };
-      reader.readAsDataURL(file);
-    }
+    };
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

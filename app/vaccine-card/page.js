@@ -40,7 +40,7 @@ const VaccineCard = () => {
   };
 
   return (
-    <div className="overflow-auto p-4 bg-white print:p-0">
+    <div className="overflow-auto p-4 bg-white ">
     <div ref={cardRef} className="min-w-[800px] space-y-6">
       {/* Your prefilled card content goes here */}
       <header className="grid grid-cols-3 gap-4 mb-6">
