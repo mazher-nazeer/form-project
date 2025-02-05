@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import QRCode from "qrcode";
+import Link from "next/link";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -60,13 +61,7 @@ const Home = () => {
     console.log("QR Code URL:", qrUrl);
   };
 
-  const shareOnWhatsApp = () => {
-    if (qrCodeUrl) {
-      const message = encodeURIComponent("Here is your QR Code: " + qrCodeUrl);
-      const whatsappUrl = `https://wa.me/?text=${message}`;
-      window.open(whatsappUrl, "_blank");
-    }
-  };
+
 
   return (
     <div className="max-w-md mx-auto p-4 border rounded-lg shadow-md">
@@ -96,14 +91,17 @@ const Home = () => {
         <div className="text-center mt-4">
           <p className="font-bold">Scan this QR Code:</p>
           <img src={qrCodeUrl} alt="QR Code" className="mx-auto w-40 h-40" />
-        </div>
-      )}
-      <button
-            onClick={shareOnWhatsApp}
-            className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+          <Link
+            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(qrCodeUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block bg-green-500 text-white p-2 rounded"
           >
             Share on WhatsApp
-          </button>
+          </Link>
+        </div>
+
+      )}
     </div>
   );
 };
