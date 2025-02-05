@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, Suspense } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -160,7 +160,7 @@ const VaccineCard = () => {
 export default function VaccineCertificateWrapper() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <VaccineCertificate />
+      <VaccineCard />
     </Suspense>
   );
 }
