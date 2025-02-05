@@ -4,9 +4,9 @@ import { useSearchParams } from "next/navigation";
 
 const VaccineCertificate = () => {
   const searchParams = useSearchParams();
-  const card = searchParams.get("card"); // Get the 'card' key from URL
-
+  const card = searchParams.get("card");
   const [data, setData] = useState(null);
+  const cardRef = useRef();
 
   useEffect(() => {
     if (card) {
@@ -20,6 +20,18 @@ const VaccineCertificate = () => {
   if (!data) {
     return <p className="text-center mt-10 text-red-500">Invalid QR Code or No Data Found!</p>;
   }
+
+  const downloadPDF = () => {
+    const input = cardRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save(`Vaccination_Card_${card}.pdf`);
+    });
+  };
 
   return (
     <div className="overflow-auto p-4 bg-white print:p-0">
@@ -138,6 +150,13 @@ const VaccineCertificate = () => {
           </div>
         </footer>
       </div>
+
+      <button
+        onClick={downloadPDF}
+        className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+      >
+        Download PDF
+      </button>
     </div>
   );
 };
