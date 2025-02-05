@@ -1,15 +1,14 @@
 "use client";
-import { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const VaccineCertificate = () => {
+const VaccineCard = () => {
   const searchParams = useSearchParams();
   const card = searchParams.get("card");
   const [data, setData] = useState(null);
-  const cardRef = useRef();
-  
+  const cardRef = useRef(null); // 🔹 Reference to the card for PDF generation
 
   useEffect(() => {
     if (card) {
@@ -24,27 +23,29 @@ const VaccineCertificate = () => {
     return <p className="text-center mt-10 text-red-500">Invalid QR Code or No Data Found!</p>;
   }
 
-  const downloadPDF = () => {
+  // 🔹 Function to generate PDF
+  const downloadPDF = async () => {
     const input = cardRef.current;
-    html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save(`Vaccination_Card_${card}.pdf`);
-    });
+    if (!input) return;
+
+    const canvas = await html2canvas(input, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    pdf.save(`Vaccine_Certificate_${card}.pdf`);
   };
 
   return (
     <div className="overflow-auto p-4 bg-white print:p-0">
-      <div className="min-w-[800px] space-y-6">
-        {/* Header Section */}
+      <div ref={cardRef} className="min-w-[800px] space-y-6">
+        {/* Your prefilled card content goes here */}
         <header className="grid grid-cols-3 gap-4 mb-6">
           <div className="flex items-center justify-center">
             <img src="https://via.placeholder.com/100x50" alt="Logo" className="w-32 mx-auto" />
           </div>
-
           <div className="text-center space-y-2">
             <h1 className="text-xl font-bold">Uni Care Medical Lab (UCML)</h1>
             <div className="text-sm text-gray-600">
@@ -57,18 +58,26 @@ const VaccineCertificate = () => {
               </div>
             </div>
           </div>
-
           <div className="flex items-center justify-center">
-            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:3000/vaccine-card?card=${card}`} 
-                 alt="QR Code" className="w-28 h-28 mx-auto" />
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:3000/vaccine-card?card=${card}`}
+              alt="QR Code"
+              className="w-28 h-28 mx-auto"
+            />
           </div>
         </header>
 
         {/* Patient Info Section */}
         <div className="grid grid-cols-3 gap-4 text-sm mb-6">
-          <div><span className="font-semibold">M.R.#</span> {card}</div>
-          <div><span className="font-semibold">Vaccination Date:</span> 23-Jan-2025</div>
-          <div><span className="font-semibold">Validity Date:</span> 23-Jan-2030</div>
+          <div>
+            <span className="font-semibold">M.R.#</span> {card}
+          </div>
+          <div>
+            <span className="font-semibold">Vaccination Date:</span> 23-Jan-2025
+          </div>
+          <div>
+            <span className="font-semibold">Validity Date:</span> 23-Jan-2030
+          </div>
         </div>
 
         {/* Patient Details */}
@@ -76,15 +85,33 @@ const VaccineCertificate = () => {
           <div className="col-span-10">
             <h4 className="text-lg font-semibold mb-3">Patient Details</h4>
             <div className="flex flex-wrap gap-4 text-sm">
-              <div><span className="font-semibold">Name:</span> {data.name}</div>
-              <div><span className="font-semibold">S/O:</span> {data.fatherName}</div>
-              <div><span className="font-semibold">Gender:</span> {data.gender}</div>
-              <div><span className="font-semibold">Date of Birth:</span> {data.dob}</div>
-              <div><span className="font-semibold">Contact No.:</span> {data.contact}</div>
-              <div><span className="font-semibold">C.N.I.C. #:</span> {data.cnic}</div>
-              <div><span className="font-semibold">Nationality:</span> {data.nationality}</div>
-              <div><span className="font-semibold">Passport #:</span> {data.passport}</div>
-              <div><span className="font-semibold">Batch Number:</span> {data.batchNumber}</div>
+              <div>
+                <span className="font-semibold">Name:</span> {data.name}
+              </div>
+              <div>
+                <span className="font-semibold">S/O:</span> {data.fatherName}
+              </div>
+              <div>
+                <span className="font-semibold">Gender:</span> {data.gender}
+              </div>
+              <div>
+                <span className="font-semibold">Date of Birth:</span> {data.dob}
+              </div>
+              <div>
+                <span className="font-semibold">Contact No.:</span> {data.contact}
+              </div>
+              <div>
+                <span className="font-semibold">C.N.I.C. #:</span> {data.cnic}
+              </div>
+              <div>
+                <span className="font-semibold">Nationality:</span> {data.nationality}
+              </div>
+              <div>
+                <span className="font-semibold">Passport #:</span> {data.passport}
+              </div>
+              <div>
+                <span className="font-semibold">Batch Number:</span> {data.batchNumber}
+              </div>
             </div>
           </div>
 
@@ -98,72 +125,36 @@ const VaccineCertificate = () => {
           </div>
         </div>
 
-        {/* Vaccination Data */}
-        <div className="mb-6">
-          <h2 className="text-center text-xl font-bold border border-black py-2 mb-4">
-            VACCINATION CERTIFICATE
-          </h2>
-          <h4 className="text-center text-lg font-semibold mb-6">
-            Meningococcal Quadrivalent Polysaccharide Conjugate Vaccine
+        {/* Footer */}
+        <footer className="space-y-6 text-center">
+          <h4 className="font-bold text-red-600">
+            This report is digitally verified and does not require any Signature
           </h4>
-
-          <table className="w-full border-collapse">
-            <tbody>
-              <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Brand</td>
-                <td className="p-3">Nimenrix</td>
-              </tr>
-              <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Manufacturer</td>
-                <td className="p-3">Pfizer</td>
-              </tr>
-              <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Status</td>
-                <td className="p-3">Vaccinated</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-semibold">Remarks</td>
-                <td className="p-3">This Vaccination is valid for 5 years.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Footer Section */}
-        <footer className="space-y-6">
-          <div className="text-center text-red-600">
-            <h4 className="font-bold mb-2">This report is digitally verified and does not require any Signature</h4>
-            <p className="text-xs text-gray-600">
-              For verification, please scan the QR code or visit 
-              <a href="https://www.ucml.pk/" className="text-blue-500 underline"> ucml.pk</a> and enter MRN/CNIC.<br />
-              This certificate is valid for all airports, airlines, embassies, and schools worldwide.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-4 gap-4 pt-4 border-t border-gray-300 text-sm">
-            <div className="text-center">
-              <p className="font-semibold">Dr. M.Tayyab</p>
-              <p>M.B.B.S, RMP</p>
-              <p>Chief Physician</p>
-            </div>
-          </div>
-
-          <div className="text-center text-xs text-gray-500">
+          <p className="text-xs text-gray-600">
+            For verification, scan the QR code or visit{" "}
+            <a href="https://www.ucml.pk/" className="text-blue-500 underline">
+              ucml.pk
+            </a>{" "}
+            and enter MRN/CNIC.
+          </p>
+          <div className="text-xs text-gray-500">
             Printed Date & Time: {new Date().toLocaleString()}
           </div>
         </footer>
       </div>
 
-      <button
-        onClick={downloadPDF}
-        className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-      >
-        Download PDF
-      </button>
+      {/* 🔹 Download PDF Button */}
+      <div className="text-center mt-6">
+        <button
+          onClick={downloadPDF}
+          className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700"
+        >
+          Download as PDF
+        </button>
+      </div>
     </div>
   );
 };
-
 
 export default function VaccineCertificateWrapper() {
   return (
