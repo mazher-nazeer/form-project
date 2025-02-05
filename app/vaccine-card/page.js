@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 const VaccineCard = () => {
+  
   const searchParams = useSearchParams();
   const card = searchParams.get("card");
   const [data, setData] = useState(null);
