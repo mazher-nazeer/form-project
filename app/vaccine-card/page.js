@@ -161,20 +161,20 @@ const VaccineCard = () => {
           <table className="w-full border-collapse">
             <tbody>
               <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Brand</td>
-                <td className="p-3">Nimenrix</td>
+                <td className="p-3 font-semibold print:p-2">Brand</td>
+                <td className="p-3 print:p-2">Nimenrix</td>
               </tr>
               <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Manufacturer</td>
-                <td className="p-3">Pfizer</td>
+                <td className="p-3 font-semibold print:p-2">Manufacturer</td>
+                <td className="p-3 print:p-2">Pfizer</td>
               </tr>
               <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">Status</td>
-                <td className="p-3">Vaccinated</td>
+                <td className="p-3 print:p-2 font-semibold">Status</td>
+                <td className="p-3 print:p-2">Vaccinated</td>
               </tr>
               <tr>
-                <td className="p-3 font-semibold">Remarks</td>
-                <td className="p-3">This Vaccination is valid for 5 years.</td>
+                <td className="p-3 font-semibold print:p-2">Remarks</td>
+                <td className="p-3 print:p-2">This Vaccination is valid for 5 years.</td>
               </tr>
             </tbody>
           </table>
