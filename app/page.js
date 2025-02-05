@@ -44,7 +44,7 @@ const Home = () => {
 
     // Construct the QR Code URL
 
-    const qrUrl = `https://form-project-red.vercel.app/?card=${randomKey}`;
+    const qrUrl = `https://form-project-red.vercel.app/vaccine-card?card=${randomKey}`;
 
     // Save form data to localStorage
     localStorage.setItem(randomKey, JSON.stringify(formData));
