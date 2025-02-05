@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import signature from "../../public/images/signature2.png"
-import hospLogo from "../../public/images/hosp-logo.png"
+import qrCode from "../../public/images/qr-code.jpeg"
 import Image from "next/image";
 import '../globals.css'
 
@@ -54,7 +54,7 @@ const VaccineCard = () => {
         </div> */}
          <div className=" flex items-center justify-center">
           {data.hospitalImage ? (
-            <img src={data.hospitalImage} alt="Hospital Logo" width={0} height={0} className="w-24 mx-auto print:w-20"  />
+            <Image src={data.hospitalImage} alt="Hospital Logo" width={0} height={0} className="w-24 mx-auto print:w-20"  />
           ) : (
             <img src="https://via.placeholder.com/100x120" alt="Patient" className="w-24 mx-auto print:w-20" />
           )}
@@ -72,11 +72,14 @@ const VaccineCard = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://form-project-red.vercel.app/vaccine-card?card=${card}`}
-            // src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/vaccine-card?card=${card}`}
-            alt="QR Code"
-            className="w-24 h-24 mx-auto print:w-12 print:h-12"
+          <Image
+          src={qrCode}
+            // src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://form-project-red.vercel.app/vaccine-card?card=${card}`}
+            // // src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/vaccine-card?card=${card}`}
+            // alt="QR Code"
+            className="w-24 h-24 mx-auto print:w-14"
+          width={0}
+          height={0}
           />
         </div>
       </header>
@@ -196,7 +199,7 @@ const VaccineCard = () => {
           Printed Date & Time: {data.printedOn.toLocaleString()}
         
           </div>
-          <div className=" ">
+          <div className="relative ">
             <p className="font-semibold">{data.physicianName}</p>
             <p>M.B.B.S,RMP</p>
             <p>Microbiologist </p>
