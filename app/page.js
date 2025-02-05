@@ -70,7 +70,7 @@ const Home = () => {
         localStorage.setItem("compressedImage", compressedDataUrl);
   
         // Set the compressed image to the state
-        setData((prev) => ({ ...prev, image: compressedDataUrl }));
+        setFormData((prev) => ({ ...prev, image: compressedDataUrl }));
       };
     };
   };
