@@ -26,7 +26,7 @@ const Home = () => {
     vaccinename: "",
     vaccineManufacturer: "",
     status: "",
-    vaccineValidity
+    vaccineValidity: "",
   });
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
