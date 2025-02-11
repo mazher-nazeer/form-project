@@ -31,25 +31,27 @@ const VaccineCard = () => {
     );
   }
 
-  // 🔹 Function to generate PDF
   const downloadPDF = async () => {
     const input = cardRef.current;
     if (!input) return;
-
-    const canvas = await html2canvas(content, {
-      scale: 1.5, // Lowering scale reduces file size
-      useCORS: true, // Ensures better cross-origin handling
-    });
-
-    const imgData = canvas.toDataURL("image/jpeg", 0.5); // Use JPEG & reduce quality to 50%
-
-
-    const pdf = new jsPDF("p", "mm", "a4");
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    pdf.save(`Vaccine_Certificate_${card}.pdf`);
+  
+    const canvas = await html2canvas(input, { scale: 1 }); // Lower scale
+    canvas.toBlob((blob) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const imgData = reader.result;
+        const pdf = new jsPDF("p", "mm", "a4");
+  
+        const imgWidth = 150; // Reduce width
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  
+        pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight, "", "FAST"); // Use JPEG & compression
+        pdf.save(`Vaccine_Certificate_${card}.pdf`);
+      };
+    }, "image/jpeg", 0.6);
   };
+  
 
   return (
     <div className="overflow-auto px-8 py-24 print:px-2 print:py-4  print-main-section bg-white  ">
