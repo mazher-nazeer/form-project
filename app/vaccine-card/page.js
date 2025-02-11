@@ -36,8 +36,13 @@ const VaccineCard = () => {
     const input = cardRef.current;
     if (!input) return;
 
-    const canvas = await html2canvas(input, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
+    const canvas = await html2canvas(content, {
+      scale: 1.5, // Lowering scale reduces file size
+      useCORS: true, // Ensures better cross-origin handling
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.5); // Use JPEG & reduce quality to 50%
+
 
     const pdf = new jsPDF("p", "mm", "a4");
     const imgWidth = 210;
