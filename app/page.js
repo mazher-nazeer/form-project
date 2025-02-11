@@ -338,7 +338,7 @@ const Home = () => {
           <p>Manufacturer name</p>
           <input
             type="text"
-            name=" vaccineManufacturer"
+            name="vaccineManufacturer"
             placeholder="Manufacturer name"
             className="w-full p-2 border rounded"
             onChange={handleChange}
@@ -361,7 +361,7 @@ const Home = () => {
           <p>Status</p>
           <input
             type="text"
-            name=" vaccineManufacturer"
+            name=" status"
             placeholder="Vaccinated"
             className="w-full p-2 border rounded"
             onChange={handleChange}

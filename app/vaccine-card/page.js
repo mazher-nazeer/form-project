@@ -59,9 +59,9 @@ const VaccineCard = () => {
 
         </div> */}
           <div className=" flex items-center justify-center">
-            {data.hospitalImage ? (
+            {data?.hospitalImage ? (
               <Image
-                src={data.hospitalImage}
+                src={data?.hospitalImage}
                 alt="Hospital Logo"
                 width={0}
                 height={0}
@@ -77,14 +77,14 @@ const VaccineCard = () => {
           </div>
           <div className="text-center space-y-2">
             <h1 className=" font-bold text-[38px] uppercase text-red-500 print:text-[22px]">
-              {data.hospitalName}
+              {data?.hospitalName}
             </h1>
             <div className="text-sm text-gray-600">
               <p className="flex items-center justify-center gap-2 text-base">
-                📍 {data.hospitalAddress}
+                📍 {data?.hospitalAddress}
               </p>
               <div className="flex items-center justify-center gap-4 mt-1 text-base">
-                <span>📞 {data.hospitalContact}</span>
+                <span>📞 {data?.hospitalContact}</span>
               </div>
             </div>
           </div>
@@ -104,15 +104,15 @@ const VaccineCard = () => {
           {/* Patient Info Section */}
           <div className="flex items-center justify-center gap-4  my-6 print:my-2 text-base">
             <div>
-              <span className="font-semibold">M.R.#</span> {data.mrNo}
+              <span className="font-semibold">M.R.#</span> {data?.mrNo}
             </div>
             <div>
               <span className="font-semibold">Vaccination Date:</span>
-              {new Date(data.vaccinationDate).toLocaleDateString("en-GB")}
+              {new Date(data?.vaccinationDate).toLocaleDateString("en-GB")}
             </div>
             <div>
               <span className="font-semibold">Validity Date:</span>{" "}
-              {new Date(data.validityDate).toLocaleDateString("en-GB")}
+              {new Date(data?.validityDate).toLocaleDateString("en-GB")}
             </div>
           </div>
 
@@ -124,47 +124,47 @@ const VaccineCard = () => {
             <div className="flex flex-col  text-sm  w-[70%] print:w-[84%] ">
               <div className="flex items-center gap-8 p-3 border-b-0 print:text-xs ">
                 <div className="print:flex print:flex-col">
-                  <span className="font-semibold">Name:</span> {data.name}
+                  <span className="font-semibold">Name:</span> {data?.name}
                 </div>
                 <div className="print:flex print:flex-col">
-                  <span className="font-semibold">S/O:</span> {data.fatherName}
+                  <span className="font-semibold">S/O:</span> {data?.fatherName}
                 </div>
                 <div className="print:flex print:flex-col">
-                  <span className="font-semibold">Gender:</span> {data.gender}
+                  <span className="font-semibold">Gender:</span> {data?.gender}
                 </div>
                 <div className="print:flex print:flex-col">
                   <span className="font-semibold">Date of Birth:</span>
 
-                  {new Date(data.dob).toLocaleDateString("en-GB")}
+                  {new Date(data?.dob).toLocaleDateString("en-GB")}
                 </div>
                 <div className="print:flex print:flex-col">
                   <span className="font-semibold">Contact No.:</span>{" "}
-                  {data.contact}
+                  {data?.contact}
                 </div>
               </div>
 
               <div className="flex items-center gap-8  p-3  print:text-xs">
                 <div className="print:flex print:flex-col">
-                  <span className="font-semibold">C.N.I.C. #:</span> {data.cnic}
+                  <span className="font-semibold">C.N.I.C. #:</span> {data?.cnic}
                 </div>
                 <div className="print:flex print:flex-col">
                   <span className="font-semibold">Nationality:</span>{" "}
-                  {data.nationality}
+                  {data?.nationality}
                 </div>
                 <div className="print:flex print:flex-col">
                   <span className="font-semibold">Passport #:</span>{" "}
-                  {data.passport}
+                  {data?.passport}
                 </div>
                 <div className="print:flex print:flex-col">
                   <span className="font-semibold">Batch Number:</span>{" "}
-                  {data.batchNumber}
+                  {data?.batchNumber}
                 </div>
               </div>
             </div>
             <div className=" flex justify-center">
-              {data.image ? (
+              {data?.image ? (
                 <Image
-                  src={data.image}
+                  src={data?.image}
                   alt="Patient"
                   className="w-32 h-32 print:w-24 "
                   width={0}
@@ -193,20 +193,20 @@ const VaccineCard = () => {
               <tbody>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 font-semibold print:p-2">Brand</td>
-                  <td className="p-3 print:p-2"> {data.vaccinename}</td>
+                  <td className="p-3 print:p-2"> {data?.vaccinename}</td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 font-semibold print:p-2">Manufacturer</td>
-                  <td className="p-3 print:p-2"> {data.vaccineManufacturer}</td>
+                  <td className="p-3 print:p-2"> {data?.vaccineManufacturer}</td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 print:p-2 font-semibold">Status</td>
-                  <td className="p-3 print:p-2">{data.status}</td>
+                  <td className="p-3 print:p-2">{data?.status}</td>
                 </tr>
                 <tr>
                   <td className="p-3 font-semibold print:p-2">Remarks</td>
                   <td className="p-3 print:p-2">
-                    This Vaccination is valid for 5 years.
+                    This Vaccination is valid for <span>{data?.vaccineValidity}</span>, years.
                   </td>
                 </tr>
               </tbody>
@@ -223,7 +223,7 @@ const VaccineCard = () => {
           <div className=" flex w-full items-center justify-between gap-4 pt-4 border-t border-gray-300 text-sm">
             <div className="text-xs text-gray-500">
               Printed Date & Time:{" "}
-              {new Date(data.printedOn)
+              {new Date(data?.printedOn)
                 .toLocaleString("en-GB", {
                   day: "2-digit",
                   month: "2-digit",
@@ -236,7 +236,7 @@ const VaccineCard = () => {
                 .replace(/\//g, "-")}
             </div>
             <div className="relative ">
-              <p className="font-semibold">{data.physicianName}</p>
+              <p className="font-semibold">{data?.physicianName}</p>
               <p>M.B.B.S,RMP</p>
               <p>Microbiologist </p>
               <div className="flex items-center justify-end w-full mt-2 pr-1">
