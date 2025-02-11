@@ -186,12 +186,15 @@ const VaccineCard = () => {
               VACCINATION CERTIFICATE
             </h2>
             <h4 className="text-center text-lg font-semibold mb-6">
-           <span style="padding-right: 3px;">
+           <span>
+            &nbsp;
              {data?.vaccinename}
             </span>
-            <span style="padding-right: 3px;">
+            <span >
+            &nbsp;
              {data?.vaccineManufacturer}
             </span>
+            &nbsp;
               Vaccine
             </h4>
 
