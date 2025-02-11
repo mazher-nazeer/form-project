@@ -193,15 +193,15 @@ const VaccineCard = () => {
               <tbody>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 font-semibold print:p-2">Brand</td>
-                  <td className="p-3 print:p-2">Nimenrix</td>
+                  <td className="p-3 print:p-2"> {data.vaccinename}</td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 font-semibold print:p-2">Manufacturer</td>
-                  <td className="p-3 print:p-2">Pfizer</td>
+                  <td className="p-3 print:p-2"> {data.vaccineManufacturer}</td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 print:p-2 font-semibold">Status</td>
-                  <td className="p-3 print:p-2">Vaccinated</td>
+                  <td className="p-3 print:p-2">{data.status}</td>
                 </tr>
                 <tr>
                   <td className="p-3 font-semibold print:p-2">Remarks</td>
