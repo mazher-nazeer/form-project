@@ -186,7 +186,13 @@ const VaccineCard = () => {
               VACCINATION CERTIFICATE
             </h2>
             <h4 className="text-center text-lg font-semibold mb-6">
-              Meningococcal Quadrivalent Polysaccharide Conjugate Vaccine
+           <span style="padding-right: 3px;">
+             {data?.vaccinename}
+            </span>
+            <span style="padding-right: 3px;">
+             {data?.vaccineManufacturer}
+            </span>
+              Vaccine
             </h4>
 
             <table className="w-full border-collapse">
@@ -201,7 +207,7 @@ const VaccineCard = () => {
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-3 print:p-2 font-semibold">Status</td>
-                  <td className="p-3 print:p-2">{data?.status}</td>
+                  <td className="p-3 print:p-2">{data?.vcStatus}</td>
                 </tr>
                 <tr>
                   <td className="p-3 font-semibold print:p-2">Remarks</td>

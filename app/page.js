@@ -25,7 +25,7 @@ const Home = () => {
     validityDate: "",
     vaccinename: "",
     vaccineManufacturer: "",
-    status: "",
+    vcStatus: "",
     vaccineValidity: "",
   });
 
@@ -361,7 +361,7 @@ const Home = () => {
           <p>Status</p>
           <input
             type="text"
-            name=" status"
+            name="vcStatus"
             placeholder="Vaccinated"
             className="w-full p-2 border rounded"
             onChange={handleChange}
